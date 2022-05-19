@@ -1,0 +1,78 @@
+Tutorial link - https://codelabs.developers.google.com/codelabs/cloud-app-engine-python3#0
+
+link for gcloud- https://www.cloudskillsboost.google/focuses/3634?parent=catalog
+
+
+student_03_ee97178d5b1e@cloudshell:~ (qwiklabs-gcp-04-903c09951c93)$ gcloud auth list
+Credentialed Accounts
+
+ACTIVE: *
+ACCOUNT: student-03-ee97178d5b1e@qwiklabs.net
+
+    $ gcloud config set account `ACCOUNT`
+
+student_03_ee97178d5b1e@cloudshell:~ (qwiklabs-gcp-04-903c09951c93)$ gcloud config list project
+[core]
+project = qwiklabs-gcp-04-903c09951c93
+
+Your active configuration is: [hello-world]
+student_03_ee97178d5b1e@cloudshell:~ (qwiklabs-gcp-04-903c09951c93)$ mkdir ~/helloworld
+student_03_ee97178d5b1e@cloudshell:~ (qwiklabs-gcp-04-903c09951c93)$ cd ~/helloworld
+student_03_ee97178d5b1e@cloudshell:~/helloworld (qwiklabs-gcp-04-903c09951c93)$ touch main.py
+student_03_ee97178d5b1e@cloudshell:~/helloworld (qwiklabs-gcp-04-903c09951c93)$ cloudshell edit main.py
+student_03_ee97178d5b1e@cloudshell:~/helloworld (qwiklabs-gcp-04-903c09951c93)$ touch requirements.txt
+student_03_ee97178d5b1e@cloudshell:~/helloworld (qwiklabs-gcp-04-903c09951c93)$ cloudshell edit requirements.txt
+student_03_ee97178d5b1e@cloudshell:~/helloworld (qwiklabs-gcp-04-903c09951c93)$ touch app.yaml
+student_03_ee97178d5b1e@cloudshell:~/helloworld (qwiklabs-gcp-04-903c09951c93)$ cloudshell edit app.yaml
+student_03_ee97178d5b1e@cloudshell:~/helloworld (qwiklabs-gcp-04-903c09951c93)$ ls
+app.yaml  main.py  requirements.txt
+student_03_ee97178d5b1e@cloudshell:~/helloworld (qwiklabs-gcp-04-903c09951c93)$ gcloud app deploy
+Services to deploy:
+
+descriptor:                  [/home/student_03_ee97178d5b1e/helloworld/app.yaml]
+source:                      [/home/student_03_ee97178d5b1e/helloworld]
+target project:              [qwiklabs-gcp-04-903c09951c93]
+target service:              [default]
+target version:              [20220519t092200]
+target url:                  [https://qwiklabs-gcp-04-903c09951c93.uc.r.appspot.com]
+target service account:      [App Engine default service account]
+
+
+Do you want to continue (Y/n)?  y
+
+Beginning deployment of service [default]...
+Created .gcloudignore file. See `gcloud topic gcloudignore` for details.
+Uploading 3 files to Google Cloud Storage
+33%
+67%
+100%
+100%
+File upload done.
+Updating service [default]...done.     
+Setting traffic split for service [default]...done.   
+Deployed service [default] to [https://qwiklabs-gcp-04-903c09951c93.uc.r.appspot.com]
+
+You can stream logs from the command line by running:
+  $ gcloud app logs tail -s default
+
+To view your application in the web browser run:
+  $ gcloud app browse
+student_03_ee97178d5b1e@cloudshell:~/helloworld (qwiklabs-gcp-04-903c09951c93)$ gcloud app describe
+authDomain: gmail.com
+codeBucket: staging.qwiklabs-gcp-04-903c09951c93.appspot.com
+databaseType: CLOUD_DATASTORE_COMPATIBILITY
+defaultBucket: qwiklabs-gcp-04-903c09951c93.appspot.com
+defaultHostname: qwiklabs-gcp-04-903c09951c93.uc.r.appspot.com
+featureSettings:
+  splitHealthChecks: true
+  useContainerOptimizedOs: true
+gcrDomain: us.gcr.io
+id: qwiklabs-gcp-04-903c09951c93
+locationId: us-central
+name: apps/qwiklabs-gcp-04-903c09951c93
+serviceAccount: qwiklabs-gcp-04-903c09951c93@appspot.gserviceaccount.com
+servingStatus: SERVING
+student_03_ee97178d5b1e@cloudshell:~/helloworld (qwiklabs-gcp-04-903c09951c93)$ APPENGINE_HOSTNAME=$(gcloud app describe --format "value(defaultHostname)")
+student_03_ee97178d5b1e@cloudshell:~/helloworld (qwiklabs-gcp-04-903c09951c93)$ curl https://$APPENGINE_HOSTNAME
+Hello World!
+student_03_ee97178d5b1e@cloudshell:~/helloworld (qwiklabs-gcp-04-903c09951c93)$
